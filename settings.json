@@ -1,0 +1,18 @@
+{
+  "lastChangelogVersion": "0.80.2",
+  "theme": "dark",
+  "packages": [
+    "npm:pi-neuralwatt-provider",
+    "npm:@monotykamary/pi-vcc",
+    "npm:pi-rtk-optimizer",
+    "npm:@juicesharp/rpiv-btw",
+    "npm:@upstash/context7-pi",
+    "npm:pi-agent-browser-native",
+    "npm:pi-vision-handoff",
+    "npm:@gotgenes/pi-permission-system",
+    "npm:@ayulab/pi-rewind"
+  ],
+  "defaultProvider": "neuralwatt",
+  "defaultModel": "glm-5.2-short",
+  "defaultThinkingLevel": "xhigh"
+}

@@ -1,0 +1,14 @@
+# Secrets & private data
+auth.json
+sessions/
+
+# Logs & churn
+pi-debug.log
+run-history.jsonl
+
+# Large / derived / rebuildable
+ayu/
+cache/
+extensions/
+npm/
+tmp/
