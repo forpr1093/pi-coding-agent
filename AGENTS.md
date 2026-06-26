@@ -79,41 +79,37 @@ Only use Web Search when
 1. Context7 hits usage limit.
 2. Unable to find relevant information from Contenxt7
 
-## Subagent Policy
+## Subagent & Orchestration Policy
 
-You have background subagents. They are not a default — spawning has real
-overhead (a fresh agent with no memory of this conversation, context handoff,
-result-wait latency), so it only pays off when the work is substantial enough
-to amortize that, _or_ you have other work to do while it runs.
+You have background subagents + a named-agent orchestration layer. The aim:
+don't block on work you could offload, don't spawn overhead onto trivial work.
+Pick by task shape, not by habit.
 
-**Spawn when the reason is one of these:**
+**Inline (default):** single edit, quick lookup, strictly serial work, or
+"parallel but trivial." Spawning has real overhead (a fresh agent with no
+memory of this conversation + result latency) — small things are faster
+inline.
 
-1. The work is genuinely parallel **and** sizable — multiple independent
-   pieces each worth their own focused pass, not a quick fan-out you could
-   knock out inline in a few calls.
-2. It produces a lot of intermediate context (many reads/searches/fetches)
-   whose detail you don't need to keep — hand it off to keep your context clean.
-3. You're verifying a change you just made and want a truly independent read,
-   not your own re-derivation.
-4. It's useful but off the critical path — you can start it and continue real
-   work inline rather than idling on the result.
+**Offload when it pays off** — substantial independent work, large intermediate
+context you don't need to keep, independent verification of a change you just
+made, or work to run alongside your own. Then use whatever combination the task
+calls for, and be creative about it:
 
-**Don't spawn when:** it's a single edit, one quick lookup, strictly serial
-work you'd just wait on, or "it's parallel but trivial." Parallel alone is not
-a reason — small parallel things are faster inline.
+- One or many subagents at once, in parallel. A bare task prompt is a perfectly
+  valid subagent — no defined agent required. Only `subagent_build` one when the
+  same role or constraints are worth reusing across runs.
+- Chains (`orchestrate` / `/subchain`) for linear workflows where each step's
+  output feeds the next (`{previous}`); fire-and-forget, one aggregate follow-up;
+  steps reference named agents.
+- Mix freely: several standalone subagents + a chain running alongside your own
+  work; parallel chains; defined agents + bare-task subagents in the same turn.
+- Lite (`read,bash,grep,find,ls`, no thinking) vs full (web/browser/context7/
+  thinking) — choose per subagent by what the task needs.
 
-**Before any multi-step task, state one line, then proceed:**
+**Before orchestrating:** call `subagent_catalog` to see existing named agents
++ chains — don't hand-author steps that duplicate a defined agent.
 
-subagent decision: <spawn N (lite|full) | inline> — <reason>
-
-The reason must name which of the four above applies (or why none do). If you
-say `inline` on something that looks parallel, that's fine — just make the
-reason specific, not "it's faster" hand-waving.
-
-**Hygiene:** each subagent starts with zero context — give it paths, the exact
-question, output format. Batch independent spawns. Continue/remove finished
-subagents rather than re-spawning.
-
-**Count must match:** the N in `spawn N (...)` must equal the number of
-`subagent_create` calls you actually emit that turn. If you write `spawn 2`,
-emit two calls — or fix the line to match. Never state a count you don't back.
+**Hygiene (every mode):** a subagent starts with zero context — give it
+paths, the exact question, the output format. Batch independent spawns;
+`subagent_continue` finished subagents rather than re-spawning (preserves their
+session).
