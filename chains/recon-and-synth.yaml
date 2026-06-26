@@ -1,0 +1,15 @@
+---
+name: recon-and-synth
+description: scout recon then synthesizer condenses. Minimal 2-step test chain.
+steps:
+  - agent: scout
+    task: "Investigate: {input}"
+  - agent: synthesizer
+    task: |
+      The scout agent has completed recon. Its findings:
+
+      {previous}
+
+      Based on the above, produce a tightly condensed summary.
+---
+You are operating inside a multi-step chain. Be thorough.

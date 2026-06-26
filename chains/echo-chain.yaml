@@ -1,0 +1,14 @@
+---
+name: echo-chain
+description: Minimal 2-step test chain — scout pings, synthesizer echoes prior. Cheap + fast.
+steps:
+  - agent: scout
+    task: "Reply with exactly the single word PONG and nothing else. Do not read any files."
+  - agent: synthesizer
+    task: |
+      The prior step produced:
+
+      {previous}
+
+      Reply with exactly that text uppercased, nothing else.
+---
