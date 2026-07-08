@@ -1,0 +1,60 @@
+{
+	"name": "pi-webtools-lite",
+	"version": "1.20.0",
+	"description": "Pi extension. Web search and fetch with a fallback chain (Firecrawl → Tavily → Jina) and a circuit breaker. Standalone fork (rpiv-config vendored).",
+	"keywords": [
+		"pi-package",
+		"pi-extension",
+		"rpiv",
+		"web-search",
+		"web-fetch",
+		"fallback-chain",
+		"circuit-breaker",
+		"firecrawl",
+		"tavily",
+		"jina",
+		"ai",
+		"llm",
+		"agent"
+	],
+	"type": "module",
+	"license": "MIT",
+	"author": "juicesharp",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/juicesharp/rpiv-mono.git",
+		"directory": "packages/rpiv-web-tools"
+	},
+	"homepage": "https://github.com/juicesharp/rpiv-mono/tree/main/packages/rpiv-web-tools#readme",
+	"bugs": {
+		"url": "https://github.com/juicesharp/rpiv-mono/issues"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"scripts": {
+		"test": "vitest run"
+	},
+	"files": [
+		"index.ts",
+		"web-tools.ts",
+		"breaker.ts",
+		"rpiv-config.ts",
+		"providers/",
+		"README.md",
+		"LICENSE"
+	],
+	"pi": {
+		"extensions": [
+			"./index.ts"
+		]
+	},
+	"devDependencies": {
+		"vitest": "^2.1.9"
+	},
+	"peerDependencies": {
+		"@earendil-works/pi-coding-agent": "*",
+		"@earendil-works/pi-tui": "*",
+		"typebox": "*"
+	}
+}

@@ -9,6 +9,5 @@ run-history.jsonl
 # Large / derived / rebuildable
 ayu/
 cache/
-extensions/
 npm/
 tmp/

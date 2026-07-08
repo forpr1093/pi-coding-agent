@@ -1,0 +1,11 @@
+{
+  "enabled": true,
+  "visionModel": "neuralwatt/kimi-k2.7-code",
+  "autoHandoff": true,
+  "handoffModels": [],
+  "maxTokens": 1024,
+  "cacheMax": 50,
+  "maxDescriptionLines": 0,
+  "prompt": "Describe this image exhaustively…",
+  "userPromptPrefix": "The user's request about this image: "
+}

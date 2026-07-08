@@ -1,0 +1,9 @@
+{
+  "provider": "firecrawl",
+  "apiKeys": {
+    "firecrawl": "secret-keys"
+  },
+  "baseUrls": {
+    "firecrawl": "http://localhost:3002/v1"
+  }
+}

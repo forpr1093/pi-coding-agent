@@ -1,0 +1,3 @@
+[submodule "extensions/subagent-widget"]
+	path = extensions/subagent-widget
+	url = https://github.com/forpr1093/pi-subagent-widget.git
