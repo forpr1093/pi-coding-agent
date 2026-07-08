@@ -11,3 +11,9 @@ ayu/
 cache/
 npm/
 tmp/
+node_modules/
+
+# Standalone third-party clones (kept on disk, not part of pi config)
+pi-dynamic-workflows/
+pi-packages/
+tintinweb-pi-subagents/
