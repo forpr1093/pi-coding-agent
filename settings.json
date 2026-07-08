@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.80.2",
+  "lastChangelogVersion": "0.80.3",
   "theme": "dark",
   "packages": [
     "npm:pi-neuralwatt-provider",
@@ -13,6 +13,6 @@
     "npm:@ayulab/pi-rewind"
   ],
   "defaultProvider": "neuralwatt",
-  "defaultModel": "glm-5.2-short",
-  "defaultThinkingLevel": "xhigh"
+  "defaultModel": "glm-5.2-short-flex",
+  "defaultThinkingLevel": "high"
 }
