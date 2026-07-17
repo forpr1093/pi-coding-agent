@@ -85,9 +85,8 @@ Only use Web Search when
 
 ## Subagent & Orchestration Policy
 
-You have background subagents + a named-agent orchestration layer. The aim:
-don't block on work you could offload, don't spawn overhead onto trivial work.
-Pick by task shape, not by habit.
+Don't block on work you could offload, and don't spawn overhead onto trivial
+work. Pick by task shape, not by habit.
 
 **Inline (default):** single edit, quick lookup, strictly serial work, or
 "parallel but trivial." Spawning has real overhead (a fresh agent with no
@@ -96,26 +95,16 @@ inline.
 
 **Offload when it pays off** — substantial independent work, large intermediate
 context you don't need to keep, independent verification of a change you just
-made, or work to run alongside your own. Then use whatever combination the task
-calls for, and be creative about it:
+made, or work to run alongside your own. Mix freely: standalone subagents +
+chains in parallel; bare-task spawns + named agents; whatever the task calls
+for. Lite (`read,bash,grep,find,ls`, no thinking) vs full (web/browser/context7/
+thinking) — choose per subagent by what the task needs.
 
-- One or many subagents at once, in parallel. A bare task prompt is a perfectly
-  valid subagent — no defined agent required. Only `subagent_build` one when the
-  same role or constraints are worth reusing across runs.
-- Chains (`orchestrate` / `/subchain`) for linear workflows where each step's
-  output feeds the next (`{previous}`); fire-and-forget, one aggregate follow-up;
-  steps reference named agents.
-- Mix freely: several standalone subagents + a chain running alongside your own
-  work; parallel chains; defined agents + bare-task subagents in the same turn etc.
-  Be flexible, as long as its more efficient & not overhead.
-- Lite (`read,bash,grep,find,ls`, no thinking) vs full (web/browser/context7/
-  thinking) — choose per subagent by what the task needs.
+**Before orchestrating:** `ls ~/.pi/agent/agents/` + `~/.pi/agent/chains/` to
+see existing named agents + chain templates — don't hand-author steps that
+duplicate a defined agent. Living + past subagents and their artifacts:
+`ls ~/.pi/agent/runs/`. The `/sub` no-arg command lists the slash surface.
 
-**Before orchestrating:** call `subagent_catalog` to see existing named agents
-
-- chains — don't hand-author steps that duplicate a defined agent.
-
-**Hygiene (every mode):** a subagent starts with zero context — give it
-paths, the exact question, the output format. Batch independent spawns;
-`subagent_continue` finished subagents rather than re-spawning (preserves their
-session).
+**Hygiene (every mode):** a subagent starts with zero context — give it paths,
+the exact question, the output format. Batch independent spawns; prefer
+`subagent_continue` over re-spawning (preserves the subagent's session).
